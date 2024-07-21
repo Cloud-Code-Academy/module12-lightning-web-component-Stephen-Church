@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-align_absolute-center">
+        <lightning-layout>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Overall Score"><b>Overall Score</b></p>
+                    <p>{overallscore}%</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Developer Fundamentals Score"><b>Developer Fundamentals Score</b></p>
+                    <p>{developerfundamentalsscore}%</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Process Automation and Logic Score"><b>Process Automation and Logic Score</b></p>
+                    <p>{processautomationandlogicscore}%</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="User Interface Score"><b>User Interface Score</b></p>
+                    <p>{userinterfacescore}%</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Testing, Debugging and Deployment Score"><b>Testing, Debugging and Deployment Score</b></p>
+                    <p>{testingdebuggingdeploymentscore}%</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column">
+                    <lightning-button-icon 
+                        icon-name="utility:delete" 
+                        alternative-text="Delete"   
+                        class="slds-m-left_xx-small" 
+                        title="Delete"
+                        onclick={handleDeleteAttempt}
+                    ></lightning-button-icon> 
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>
