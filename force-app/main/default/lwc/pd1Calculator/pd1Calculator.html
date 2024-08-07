@@ -1,0 +1,187 @@
+<template>
+    <lightning-card>
+        <div class="slds-box">
+            <div class="slds-text-heading_large slds-align_absolute-center">
+                <b>Salesforce Platform Developer 1 Certification Score Calculator</b>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2 slds-m-around_small">
+                <span>
+                    <div class="slds-text-heading_large slds-align_absolute-center"><b>Enter your section level scores:</b></div>
+                    <br>
+                    <div class="slds-text-heading_small">{developerFundamentalsLabel}</div>
+                    <lightning-input 
+                        type="number" 
+                        name="developerFundamentalsScore"
+                        value={developerFundamentalsScore}
+                        max=100
+                        onchange={handleChange}
+                    ></lightning-input>
+                    <br>
+                    <div class="slds-text-heading_small">{processAutomationAndLogicLabel}</div>
+                    <lightning-input 
+                        type="number" 
+                        name="processAutomationAndLogicScore"
+                        value={processAutomationAndLogicScore}
+                        max=100
+                        onchange={handleChange}
+                    ></lightning-input>
+                    <br>
+                    <div class="slds-text-heading_small">{userInterfaceLabel}</div>
+                    <lightning-input 
+                        type="number"                 
+                        name="userInterfaceScore"
+                        value={userInterfaceScore}
+                        max=100
+                        onchange={handleChange}
+                    ></lightning-input>
+                    <br>
+                    <div class="slds-text-heading_small">{testingDebuggingAndDeploymentLabel}</div>
+                    <lightning-input 
+                        type="number"
+                        name="testingDebuggingDeploymentScore"
+                        value={testingDebuggingDeploymentScore}
+                        max=100
+                        onchange={handleChange}
+                    ></lightning-input>
+                    <br>
+                    <div class="button-centered">
+                        <lightning-button
+                            label="Calculate Exam Score" 
+                            title="calculateExamScore" 
+                            variant="brand" 
+                            slot="actions" 
+                            onclick={calculateScore}
+                        ></lightning-button>
+                    </div>
+                </span>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-m-around_small">
+                <template lwc:if={invalidScore}>
+                    <div class="slds-text-heading_large slds-p-bottom_medium centered-content">
+                        <p><b>I know you are really smart, but come on!</b></p>
+                        <br>
+                        <p>Even you cannot get a section score higher than 100%!</p>
+                        <br>
+                        <p>&#x1F606;</p>
+                        <br>
+                        <p>Try again with section scores less than 100%.</p> 
+                        <br>
+                        <p>Let's see how you really did on this exam!</p> 
+                        <br>
+                        <p>&#128064;</p> 
+                    </div>
+                </template>
+                <template lwc:elseif={examPassed}>
+                    <div class="slds-text-heading_large slds-p-bottom_medium centered-content slds-text-color_success">
+                        <b>
+                            <p>That's awesome - you passed!</p> 
+                            <p>Your overall exam score was {examScore}%!</p>
+                            <br>
+                            <p>&#128293;&#128293;&#128293;</p>
+                            <br>
+                        </b>
+                    </div>
+                    <p class="slds-text-heading_large slds-p-bottom_medium centered-content">Now you have PD1, here is what you can do next:</p>
+                    <div class="slds-text-heading_medium centered-content">
+                        <p>
+                            Take a break and enjoy a nice beverage to celebrate! &#127867;
+                        </p>
+                        <br>
+                        <p>
+                            Spend some time with your dog - they missed you while studying! &#128054;
+                        </p>
+                        <br>
+                        <p><a href="https://www.linkedin.com/feed/">
+                            Let everyone know you passed on LinkedIn! </a>&#127881;
+                        </p>
+                        <br>
+                        <p><a href="https://trailhead.salesforce.com/en/credentials/platformdeveloperii">
+                            Start preparing for PD2! </a>&#128064;
+                        </p>
+                    </div> 
+                </template>
+                <template lwc:elseif={examFailed}>
+                    <div class="slds-text-heading_large slds-p-bottom_medium centered-content slds-text-color_error">
+                        <b>
+                            <p>Sorry you didn't pass this time.</p>
+                            <p>Your overall exam score was {examScore}%.</p>
+                        </b>
+                    </div>
+                    <div class="slds-text-heading_large slds-p-bottom_medium centered-content"> 
+                        <p>Keep your chin up, you'll pass next time!</p> 
+                        <p>Here is how you can prepare:</p>
+                    </div>
+                    <div class="slds-text-heading_medium centered-content">
+                        <p>
+                            Take a break and rest your brain for a bit. You worked hard. &#x1F6CC;</p>
+                        <br>
+                        <p>
+                            Spend some time with your dog - they missed you while studying! &#128054;</p>
+                        <br>
+                        <p>
+                            Your past PD1 results are below. <a href="https://trailhead.salesforce.com/help?article=Salesforce-Certified-Platform-Developer-I-Exam-Guide">
+                            Focus on the areas you struggled. </a>&#x1F4D6;</p>
+                        <br>
+                        <p><a href="https://trailhead.salesforce.com/trailblazer-community/feed">
+                            Get help from the Salesforce community if you're stuck. </a>&#x1F4A1;
+                        </p>
+                        <br>
+                        <p><a href="https://www.webassessor.com/wa.do?page=login&branding=SALESFORCE">
+                            Schedule your exam when you are ready to crush it! </a>&#x1F4AA;
+                        </p>
+                    </div> 
+                </template>
+                <template lwc:else>
+                    <div class="slds-text-heading_large slds-p-bottom_medium centered-content">
+                        <b>
+                            <p>Have you taken your exam?</p>
+                            <p>Enter your scores to see your overall score </p>&#128064;
+                        </b>
+                    </div>
+                    <div class="slds-text-heading_large slds-p-bottom_medium centered-content"> 
+                        <p>Still not taken the exam?</p> 
+                        <p>Here are some resources that can help:</p>
+                    </div>
+                    <div class="slds-text-heading_medium centered-content">
+                        <p>
+                            Take your dog for a walk - the fresh air will help your brain! &#128054;</p>
+                        <br>
+                        <p><a href="https://focusonforce.com/courses/salesforce-certified-platform-developer-1-exams/">
+                            Take a practice exam to see if you are ready. </a>&#128064;</p>
+                        <br>
+                        <p><a href="https://trailhead.salesforce.com/trailblazer-community/feed">
+                            Get help from the Salesforce community if you're stuck on something. </a>&#x1F4A1;
+                        </p>
+                        <br>
+                        <p><a href="https://www.webassessor.com/wa.do?page=login&branding=SALESFORCE">
+                            Schedule your exam when you are ready to crush it! </a>&#x1F4AA;
+                        </p>
+                    </div> 
+                </template>
+            </div>
+        </div>
+        <template lwc:if={examFailed}>
+            <div slot = "footer">
+                <h1 class="slds-text-heading_large slds-align_absolute-center">
+                    Here are your past PD1 exam scores. Study hard on the sections you got the lowest scores on.</h1>
+                <lightning-tabset>
+                    <div for:each={attemptHistory} for:item="attempt" key={attempt.Id}>
+                        <lightning-tab label={attempt.Id}>
+                            <c-score-information
+                                attemptid={attempt.Id}
+                                overallscore={attempt.overallScore}
+                                developerfundamentalsscore={attempt.developerFundamentalsScore}
+                                processautomationandlogicscore={attempt.processAutomationAndLogicScore}
+                                userinterfacescore={attempt.userInterfaceScore}
+                                testingdebuggingdeploymentscore={attempt.testingDebuggingDeploymentScore}
+                                ondeleteattempt={deleteAttemptHandler}
+                            ></c-score-information>         
+                        </lightning-tab>
+                    </div>
+                </lightning-tabset>
+            </div>
+        </template>
+    </lightning-card>
+</template>

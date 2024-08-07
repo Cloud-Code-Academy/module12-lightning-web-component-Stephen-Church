@@ -1,3 +1,4 @@
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=15435950&assignment_repo_type=AssignmentRepo)
 # Developer Kickstart: Introduction to Lightning Web Components (LWC)
 This repository is a foundational pillar of the Developer Kickstart curriculum at Cloud Code Academy. Crafted specifically for budding Salesforce developers, this module introduces the groundbreaking world of Lightning Web Components. LWC opens a new dimension in Salesforce front-end development, emphasizing modern JavaScript techniques, Salesforce data integration, and interactive user interfaces.
 
