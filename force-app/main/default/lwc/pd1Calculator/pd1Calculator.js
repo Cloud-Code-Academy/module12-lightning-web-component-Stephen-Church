@@ -83,7 +83,7 @@ export default class Pd1Calculator extends LightningElement {
             weightedUserInterfaceScore + 
             weightedTestingDebuggingDeploymentScore;
 
-        if (this.examScore > passingScore) {
+        if (this.examScore >= passingScore) {
             this.examPassed = true;
             this.attemptHistory = [];
             this.currentHistoryId = 0;
